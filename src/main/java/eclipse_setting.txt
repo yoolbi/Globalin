@@ -1,0 +1,35 @@
+eclipse 다운 받을 때 두번째 web version
+
+1. package explorer
+2. preferences -> Java -> Installed JREs -> 
+   (초기에) 원래 있던 거 삭제하고 새로 추가 -> standard VM -> 
+   C:\Program Files\Java 안에 있는 jdk 아님 jre 파일 선택 후 확인 
+3. new dynamic web project (전부 대문자 이름)
+   target runtime -> new runtime -> apache - > 9.0 -> apache file 경로 -> 확인
+4. src/main/java 안에 ctrl+n class 만들기 (앞에만 대문자 이름.java)
+5. 우클릭 run as application
+
+
+run file
+1. cd C:\Program Files\Java\jdk-1.8\bin
+2. javac Hello.java
+3. java -classpath C:\test\ Hello
+
+
+git & eclipse 연동
+1. git 검색 -> git repositories
+2. git clone
+3. git 주소 넣기
+4. 내 계정 이메일, github->setting->developer setting -> personal access tokens -> token 을 비번
+5. 위치는 전체 폴더 (workspace)
+6. 검색 -> git staging
+
+import -> general -> Projects from folder or archive
+
+
+project right click -> properties -> 
+1) java compiler -> enable project specific setting -> compiler compliance level : 1.8
+2) resource -> text file encoding -> other -> euc-kr
+
+자동 줄바꿈 ctrl+shift+f
+
