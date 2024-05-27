@@ -1,8 +1,8 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class Jdbc {
 
@@ -13,31 +13,55 @@ public class Jdbc {
       String userid = "scott";
       String passwd = "tiger";
       Connection con = null;
-      Statement stmt = null;
+      PreparedStatement stmt = null;
       ResultSet rs = null;
       try {
          Class.forName(driver);
          con = DriverManager.getConnection(url, userid, passwd);
+         con.setAutoCommit(false);
          System.out.println(con);
          String sql = "INSERT INTO DEPT ( "
                + "               DEPTNO "
                + "               ,DNAME "
                + "               ,LOC "
                + "            ) VALUES ( "
-               + "               '50' "
-               + "               ,'2024-IT 2기' "
-               + "                ,'영등포' "
+               + "               ? "
+               + "               ,? "
+               + "                ,? "
                + "            )";
-         stmt = con.createStatement();
-         int count = stmt.executeUpdate(sql);
+         stmt = con.prepareStatement(sql);
+         stmt.setInt(1, 50);
+         stmt.setString(2,  "2024-IT 2기");
+         stmt.setString(3,  "영등포");
+         int count = stmt.executeUpdate();
          System.out.println(count);
+         if (1 == count) {
+        	 sql = "INSERT INTO DEPT ( "
+        			 + "               DEPTNO "
+        			 + "               ,DNAME "
+        			 + "               ,LOC "
+        			 + "            ) VALUES ( "
+        			 + "               ? "
+        			 + "               ,? "
+        			 + "                ,? "
+        			 + "            )";
+        	 stmt = con.prepareStatement(sql);
+        	 stmt.setInt(1, 60);
+             stmt.setString(2,  "2024-IT 3기");
+             stmt.setString(3,  "영등포");
+        	 count = stmt.executeUpdate();
+        	 System.out.println(count);
+        	 if (1 == count) {
+        		 con.commit();
+        	 }      	         	 
+         }
 
          sql = "SELECT DEPTNO "
                + "        ,DNAME "
                + "        ,LOC "
                + " FROM    DEPT";
-         stmt = con.createStatement();
-         rs = stmt.executeQuery(sql);
+         stmt = con.prepareStatement(sql);
+         rs = stmt.executeQuery();
          while (rs.next()) {
             System.out.print(rs.getString("DEPTNO")+",");
             System.out.print(rs.getString("DNAME")+",");
@@ -46,6 +70,11 @@ public class Jdbc {
          }
       } catch (Exception e) {
          e.printStackTrace();
+         try {
+			con.rollback();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
       } finally {
          try {
             if (rs != null)
