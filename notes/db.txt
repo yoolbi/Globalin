@@ -1,0 +1,23 @@
+설치:
+1) oracleXE184
+2) sqldeveloper
+3) eXERD
+
+sqlplus
+사용자명: 
+비밀번호: 0716
+
+sqldeveloper
+연결: alt+f10
+
+*CRUD(create,retrieve,update,delete)
+
+*트랜잭션(Transaction)
+커밋(commit),롤백(rollback)
+수동 커밋 필수 (자동커밋 하면 안됨)
+
+*Prepared statement (선처리 방식)이란? 바인딩 변수(?)를 사용하여 sql의 반복되는 내용을 쉽게 구현 가능한 Statement이다. 
+SQL 문장이 미리 컴파일되고, 실행 시간 동안 인수 값을 위한 공간을 확보할 수 있다는 점에서 Statement 객체와 다르다.
+보안 때문에 무조건 사용해야함.
+형식 : sql문 where 조건 = ?;
+set(x번째 물음표,넣을값);
