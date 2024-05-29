@@ -27,12 +27,16 @@ https://github.com/GroovySunday/doit-oracle/blob/master/chap04/chap04_exercise.s
 
 -----------------------------------------------------------------------------------------------
 
+*실행 순서: FROM -> WHERE -> GROUP BY -> SELECT -> DISTINCT -> ORDER BY -> LIMIT
+
+
 *chap06
 TRIM(삭제옵션(선택), '삭제할 문자(선택)' FROM '원본 문자열 데이터(필수))
 NVL(NULL인지 여부를 검사할 데이터 또는 열, 앞의 데이터가 NULL일 경우 반환할 데이터)
 DECODE(검사 대상이 될 열 또는 데이터 또는 연산이나 함수의 결과, 
 		'조건1', 데이터가 조건1과 일치할 때 반환할 결과,
 		'조건2', 데이터가 조건2과 일치할 때 반환할 결과,...)
+
 	
 *chap07
 GROUP BY.. HAVING
@@ -45,6 +49,7 @@ SELECT DEPTNO, JOB, AVG(SAL)
 GROUP BY DEPTNO, JOB
 HAVING AVG(SAL) >= 2000
 ORDER BY DEPTNO, JOB;
+
 
 *chap08
 조인(join)은 두 개 이상의 테이블을 연결하여 하나의 테이블처럼 출력할 때 사용
@@ -88,3 +93,65 @@ SELECT C.NAME AS ANIMAL_NAME
 FROM    CLINIC A
 RIGHT OUTER JOIN ANIMAL C
 ON  A.ANIMALID = C.ANIMALID;
+
+
+*chap10
+데이터 조작어 DML(Data Manipulation Language)
+
+데이터 추가
+INSERT INTO DEPT_TEMP (DEPTNO, DNAME, LOC)
+VALUES (50, 'DATABASE', 'SEOUL');
+
+데이터 수정
+UPDATE CLINIC 
+SET PRESCRIPTION = '슬개골 탈구 2기이므로, 왠만하시면 회복될때까지 유모차를 이용하세요.'
+    ,PRICE = 100000
+WHERE CLINICID = '9dba90b4-6605-4871-8c9f-9180ca61203f';
+
+데이터 삭제
+DELETE FROM ANIMAL
+WHERE ANIMALID = '33c7833c-faa1-4d19-9836-ff2b09431e8b';
+
+
+*chap11
+세션: 어떤 활동을 위한 시간이나 기간.
+오라클에서 세션은 데이터베이스 접속을 시작으로 여러 디비에서 관련 작업을 수행한 후 접속을 종료하기까지 전체 기간.
+lock: 특정 세션에서 조작중인 데이터는 트랜잭션이 완료 되기 전까지 다른 세션에서 조작할 수 없음. 데이터가 잠기는 것.
+
+
+*chap12
+데이터 정의어 DDL(Data Definition Language)
+
+생성
+CREATE TABLE EMP_DDL(
+   EMPNO      NUMBER(4),
+   ENAME      VARCHAR2(10),
+   JOB        VARCHAR2(9),
+   MGR        NUMBER(4),
+   HIREDATE   DATE,
+   SAL        NUMBER(7,2),
+   COMM       NUMBER(7,2),
+   DEPTNO     NUMBER(2)
+);
+
+CREATE TABLE DEPT_TEMP
+    AS SELECT * FROM DEPT;
+    
+변경
+ALTER TABLE EMP_ALTER
+ 	ADD HP VARCHAR2(20);
+ALTER TABLE EMP_ALTER
+	RENAME COLUMN HP TO TEL;
+ALTER TABLE EMP_ALTER
+	MODIFY EMPNO NUMBER(5);
+ALTER TABLE EMP_ALTER
+ 	DROP COLUMN TEL;
+
+테이블 이름 변경
+RENAME EMP_ALTER TO EMP_RENAME;
+
+테이블의 데이터를 삭제
+TRUNCATE TABLE EMP_RENAME;
+
+테이블을 삭제
+DROP TABLE EMP_RENAME;
