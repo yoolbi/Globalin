@@ -455,3 +455,208 @@ END;
 /
 
 
+##
+chap18
+***** 커서(cursor): SELECT문 또는 데이터 조작어 같은 SQL문을 실행했을 때 해당 SQL문을 처리하는 정보를 저장한 메모리 공간.
+	  커서를 사용하면 실행된 SQL문의 결과 값을 사용할 수 있습니다.
+*단일행 데이터를 저장하는 커서
+DECLARE
+   -- 커서 데이터를 입력할 변수 선언
+   V_DEPT_ROW DEPT%ROWTYPE;
+
+   -- 명시적 커서 선언(Declaration)
+   CURSOR c1 IS
+      SELECT DEPTNO, DNAME, LOC
+        FROM DEPT
+       WHERE DEPTNO = 40;
+
+BEGIN
+   -- 커서 열기(Open)
+   OPEN c1;
+
+   -- 커서로부터 읽어온 데이터 사용(Fetch)
+   FETCH c1 INTO V_DEPT_ROW;
+
+   DBMS_OUTPUT.PUT_LINE('DEPTNO : ' || V_DEPT_ROW.DEPTNO);
+   DBMS_OUTPUT.PUT_LINE('DNAME : ' || V_DEPT_ROW.DNAME);
+   DBMS_OUTPUT.PUT_LINE('LOC : ' || V_DEPT_ROW.LOC);
+
+   -- 커서 닫기(Close)
+   CLOSE c1;
+
+END;
+
+*여러 행의 데이터를 커서에 저장하여 사용하기(LOOP문 사용) & 파라미터를 사용하는 커서
+DECLARE
+   -- 커서 데이터를 입력할 변수 선언
+   V_DEPT_ROW DEPT%ROWTYPE;
+   -- 명시적 커서 선언(Declaration)
+   CURSOR c1 (p_deptno DEPT.DEPTNO%TYPE) IS
+      SELECT DEPTNO, DNAME, LOC
+        FROM DEPT
+       WHERE DEPTNO = p_deptno;
+BEGIN
+   -- 10번 부서 처리를 위해 커서 사용
+   OPEN c1 (10);
+      LOOP
+         FETCH c1 INTO V_DEPT_ROW;
+         EXIT WHEN c1%NOTFOUND;
+         DBMS_OUTPUT.PUT_LINE('10번 부서 - DEPTNO : ' || V_DEPT_ROW.DEPTNO
+                                     || ', DNAME : ' || V_DEPT_ROW.DNAME
+                                     || ', LOC : ' || V_DEPT_ROW.LOC);
+      END LOOP;
+   CLOSE c1;
+END;
+/
+
+*커서에 사용할 파라미터 입력받기
+DECLARE
+   -- 사용자가 입력한 부서 번호를 저장하는 변수선언
+   v_deptno DEPT.DEPTNO%TYPE;
+   -- 명시적 커서 선언(Declaration)
+   CURSOR c1 (p_deptno DEPT.DEPTNO%TYPE) IS
+      SELECT DEPTNO, DNAME, LOC
+        FROM DEPT
+       WHERE DEPTNO = p_deptno;
+BEGIN
+   -- INPUT_DEPTNO에 부서 번호 입력받고 v_deptno에 대입
+   v_deptno := &INPUT_DEPTNO;
+   -- 커서 FOR LOOP 시작. c1 커서에 v_deptno를 대입
+   FOR c1_rec IN c1(v_deptno) LOOP
+      DBMS_OUTPUT.PUT_LINE('DEPTNO : ' || c1_rec.DEPTNO
+                      || ', DNAME : ' || c1_rec.DNAME
+                      || ', LOC : ' || c1_rec.LOC);
+   END LOOP;
+END;
+/
+
+*묵시적 커서: 별다른 선언 없이 SQP문을 사용했을 때 오라클에서 자동으로 선언되는 커서.
+*OPEN,FETCH,CLOSE 지정 X. PL/SQL문 내에서 CML명령어나 SELECT INTO문 등이 실행될때 자동으로 생성 및 처리.
+
+**예외처리
+1) 컴파일 오류(compile error)/문법 오류(syntax error): 문법이 잘못되었거나 오타로 인한 오류
+2) 런타임 오루(runtime error)/실행 오류(execute error): 명령문의 실행 중 발생한 오류 <- 예외(exception)
+
+DECLARE
+   v_wrong NUMBER;
+BEGIN
+   SELECT DNAME INTO v_wrong
+     FROM DEPT
+    WHERE DEPTNO = 10;
+
+   DBMS_OUTPUT.PUT_LINE('예외가 발생하면 다음 문장은 실행되지 않습니다');
+
+EXCEPTION
+   WHEN TOO_MANY_ROWS THEN
+      DBMS_OUTPUT.PUT_LINE('예외 처리 : 요구보다 많은 행 추출 오류 발생');
+   WHEN VALUE_ERROR THEN
+      DBMS_OUTPUT.PUT_LINE('예외 처리 : 수치 또는 값 오류 발생');
+   WHEN OTHERS THEN
+      DBMS_OUTPUT.PUT_LINE('예외 처리 : 사전 정의 외 오류 발생');
+      DBMS_OUTPUT.PUT_LINE('SQLCODE : ' || TO_CHAR(SQLCODE));
+      DBMS_OUTPUT.PUT_LINE('SQLERRM : ' || SQLERRM);
+END;
+/
+
+
+##
+*chap19
+*PROCEDURE는 값을 반환하지 않고, 어떤 일련의 작업을 수행하거나 프로시저 내에서 데이터를 조작하는 데 사용된다. 
+FUNCTION의 목적은 값을 반환하는 것이다.
+
+*프로시저 생성하기
+CREATE OR REPLACE PROCEDURE pro_noparam
+IS
+   V_EMPNO NUMBER(4) := 7788;
+   V_ENAME VARCHAR2(10);
+BEGIN
+   V_ENAME := 'SCOTT';
+   DBMS_OUTPUT.PUT_LINE('V_EMPNO : ' || V_EMPNO);
+   DBMS_OUTPUT.PUT_LINE('V_ENAME : ' || V_ENAME);
+END;
+/
+
+*생성한 프로시저 실행하기
+SET SERVEROUTPUT ON;
+EXECUTE pro_noparam;
+
+*프로시저에 파라미터 지정하기
+CREATE OR REPLACE PROCEDURE pro_param_in
+(
+   param1 IN NUMBER,
+   param2 NUMBER,
+   param3 NUMBER := 3,
+   param4 NUMBER DEFAULT 4
+)
+IS
+
+BEGIN
+   DBMS_OUTPUT.PUT_LINE('param1 : ' || param1);
+   DBMS_OUTPUT.PUT_LINE('param2 : ' || param2);
+   DBMS_OUTPUT.PUT_LINE('param3 : ' || param3);
+   DBMS_OUTPUT.PUT_LINE('param4 : ' || param4);
+END;
+/
+-- 파라미터를 입력하여 프로시저 사용하기
+EXECUTE pro_param_in(1,2,9,8);
+
+*IN, OUT으로 선언한 파라미터 기능을 동시에 수행. 값을 입력받을 때와 프로시저 수행 후 결과 값을 반환할 때 사용.
+CREATE OR REPLACE PROCEDURE pro_param_inout
+(
+   inout_no IN OUT NUMBER
+)
+IS
+
+BEGIN
+   inout_no := inout_no * 2;
+END pro_param_inout;
+/
+
+*함수(function)
+*함수 생성하기
+CREATE OR REPLACE FUNCTION func_aftertax(
+   sal IN NUMBER
+)
+RETURN NUMBER
+IS
+   tax NUMBER := 0.05;
+BEGIN
+   RETURN (ROUND(sal - (sal * tax)));
+END func_aftertax;
+/
+
+*PL/SQL로 함수 실행하기
+DECLARE
+   aftertax NUMBER;
+BEGIN
+   aftertax := func_aftertax(3000);
+   DBMS_OUTPUT.PUT_LINE('after-tax income : ' || aftertax);
+END;
+/
+
+*자바에서 사용하기
+create or replace NONEDITIONABLE PROCEDURE P_DEPT
+(
+    p_deptno DEPT.DEPTNO%TYPE
+    ,p_cursor OUT SYS_REFCURSOR
+)
+IS
+    v_sql VARRCHAR2(2000);
+BEGIN
+    v_sql := ' SELECT * FROM DEPT ';
+    IF 0 < p_deptno THEN
+        v_sql := v_sql || ' WHERE DEPTNO = ' || p_dept;
+    END IF;
+    OPEN p_cursor FOR v_sql;
+END;
+
+*SQL에서 함수 사용하기
+SELECT EMPNO, ENAME, SAL, func_aftertax(SAL) AS AFTERTAX
+  FROM EMP;
+
+*패키지(package)는 업무나 기능 면에서 연관성이 높은 프로시저, 함수 등 여러 개의 PL/SQL 서브 프로그램을
+하나의 논리 그룹으로 묶어 통함/관리하는데 사용하는 객체.
+
+*트리거(trigger): 데이터베이스 안의 특정 상황이나 동작, 즉 이벤트가 발생할 경우에 자동으로 실행되는 기능을 정의하는 PL/SQL 서브프로그램.
+
+   
