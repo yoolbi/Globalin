@@ -1,17 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
 <body>
 	<h1>form.jsp</h1>
-	<form action="<%=request.getContextPath() %>/calc.abc" method="get">
-		<input type="text" name="num1">
-		<input type="text" name="num2">
-		<input type="submit" value="í™•ì¸">
+	<form action="<%=request.getContextPath() %>/calc.do" method="get">
+		<input type="text" name="num1" />
+		<input type="text" name="num2" />
+		<input type="submit" value="È®ÀÎ" />
+	
 	</form>
 </body>
 </html>

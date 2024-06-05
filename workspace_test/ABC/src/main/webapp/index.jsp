@@ -1,20 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
 <body>
 	<h1>index.jsp</h1>
 	<ul>
-		<li id="calc">ê³„ì‚°ê¸°</li>
+		<li id="calc">°è»ê±â</li>
 	</ul>
 	<script>
-		document.getElementById('calc').addEventListener('click',function(){
-			document.location.href = '<%=request.getContextPath() %>/form.abc';
-			
+		document.getElementById("calc").addEventListener("click", function() {
+			document.location.href = "<%=request.getContextPath() %>/form.do";
 		});
 	</script>
 </body>
