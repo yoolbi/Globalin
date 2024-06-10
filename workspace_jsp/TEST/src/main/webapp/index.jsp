@@ -12,6 +12,7 @@
 		<li id="calc">계산기</li>
 		<li id="login">로그인</li>
 		<li id="hobby">취미</li>
+		<li id="upload">파일 업로드</li>
 	</ul>
 	<script>
 		document.getElementById('calc').addEventListener('click',function(){
@@ -24,6 +25,10 @@
 		});
 		document.getElementById('hobby').addEventListener('click',function(){
 			document.location.href = '<%=request.getContextPath() %>/hobby.do';
+			
+		});
+		document.getElementById('upload').addEventListener('click',function(){
+			document.location.href = '<%=request.getContextPath() %>/upload.abc';
 			
 		});
 	</script>
