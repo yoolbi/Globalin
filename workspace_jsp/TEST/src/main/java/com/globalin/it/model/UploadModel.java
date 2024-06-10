@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.print.DocFlavor.STRING;
@@ -25,17 +27,23 @@ public class UploadModel {
 		int maxSize = 5 * 1024 * 1024;
 		String encType = "utf-8";
 		MultipartRequest multi = new MultipartRequest(req, realFolder, maxSize, encType, new DefaultFileRenamePolicy());	
-		List<String> oriFileNameList = new ArrayList();
-		List<String> newFileNameList = new ArrayList();
+//		List<String> oriFileNameList = new ArrayList();
+//		List<String> newFileNameList = new ArrayList();
+		List<Map> fileNameList = new ArrayList();
 		Enumeration files = multi.getFileNames();
 		while(files.hasMoreElements()) {
 			String fileName = (String)files.nextElement();
-			oriFileNameList.add(multi.getOriginalFileName(fileName));
-			newFileNameList.add(multi.getFilesystemName(fileName));
+			Map map = new HashMap();
+			map.put("OriginalFileName", multi.getOriginalFileName(fileName));
+			map.put("FilesystemName",multi.getFilesystemName(fileName));
+			fileNameList.add(map);
+//			oriFileNameList.add(multi.getOriginalFileName(fileName));
+//			newFileNameList.add(multi.getFilesystemName(fileName));
 		}
-		req.setAttribute("title", req.getParameter("title"));
-		req.setAttribute("oriFileNameList",  oriFileNameList);
-		req.setAttribute("newFileNameList",  newFileNameList);
+		req.setAttribute("title", multi.getParameter("title"));
+		req.setAttribute("fileNameList",  fileNameList);
+//		req.setAttribute("oriFileNameList",  oriFileNameList);
+//		req.setAttribute("newFileNameList",  newFileNameList);
 		
 	}
 }
