@@ -107,3 +107,104 @@ ERD 실습 파일 보기
 
 ---------------------------------------------------------------------------
 
+##MELODYTALK##
+
+INSERT INTO USERS (
+USER_ID
+,USERNAME
+,EMAIL
+,PASSWORD
+,NAME
+,COUNTRY
+,INTRO
+) VALUES (
+    'aa5176cd-aa76-4048-aa57-1e319895f241'
+    ,'yoolbi'
+    ,'yoolbi@gmail.com'
+    ,'yoolbi1234@'
+    ,'Yool Bi Lee'
+    ,'United States'
+    ,'Hi I am Yool Bi!'
+);
+
+INSERT INTO FOLLOW (
+FOLLOW_ID
+,FROM_USER_ID
+,TO_USER_ID
+) VALUES (
+    'e1f2d7dd-dcf0-4e53-99c1-41b4ad01bd36'
+    ,'aa5176cd-aa76-4048-aa57-1e319895f241'
+    ,'75c42a6c-63b5-45f1-a12f-e1f7a6d925cb'
+);
+
+INSERT INTO POST (
+POST_ID
+,USER_ID
+,CONTENT
+,IMAGE
+,MUSIC_FILE_NAME
+,COPYRIGHT
+) VALUES (
+    '6b0f8a67-b65b-496a-9824-ed987c3e9db8'
+    ,'aa5176cd-aa76-4048-aa57-1e319895f241'
+    ,'yoolbi''s first song'
+    ,'yoolbiFirstImage.jpg'
+    ,'yoolbiFirstSong.mp3'
+    ,1
+);
+
+INSERT INTO LIKES (
+LIKE_ID
+,USER_ID
+,POST_ID
+) VALUES (
+    '0f35a3bf-e020-4a78-bd8d-ba95eb6e0d8f'
+    ,'aa5176cd-aa76-4048-aa57-1e319895f241'
+    ,'dcc05420-2c76-43ff-bd04-5d05c9d1d733'
+);
+
+INSERT INTO LIKES (
+LIKE_ID
+,USER_ID
+,POST_ID
+) VALUES (
+    '9da34042-5011-4098-90f0-ab8e5673c748'
+    ,'75c42a6c-63b5-45f1-a12f-e1f7a6d925cb'
+    ,'6b0f8a67-b65b-496a-9824-ed987c3e9db8'
+);
+
+INSERT INTO COMMENTS (
+COMMENT_ID
+,USER_ID
+,POST_ID
+,COMMENT_CONTENT
+) VALUES (
+    'ceadf623-aa41-4a9c-98e6-245de20fa80a'
+    ,'aa5176cd-aa76-4048-aa57-1e319895f241'
+    ,'dcc05420-2c76-43ff-bd04-5d05c9d1d733'
+    ,'I like your song!'
+);
+
+INSERT INTO MESSAGE_GROUP (
+MESSAGE_GROUP_ID
+,FROM_USER_ID
+,TO_USER_ID
+) VALUES (
+    'a641eb83-43d0-493e-a361-89b85e02203a'
+    ,'aa5176cd-aa76-4048-aa57-1e319895f241'
+    ,'75c42a6c-63b5-45f1-a12f-e1f7a6d925cb'
+);
+
+INSERT INTO MESSAGE (
+MESSAGE_ID
+,MESSAGE_GROUP_ID
+,USER_ID
+,CONTENT
+) VALUES (
+    '8501fb0a-6889-429a-acfa-9164b4e32849'
+    ,'a641eb83-43d0-493e-a361-89b85e02203a'
+    ,'aa5176cd-aa76-4048-aa57-1e319895f241'
+    ,'hi melodytalk! i''m yoolbi'
+);
+
+COMMIT;
