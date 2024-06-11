@@ -31,6 +31,8 @@ http://localhost:8080/HELLO_PROJECT/
 -톰캣 재기동 후 확인.
 -교재 78페이지 참고.
 
+ctrl+shift+r: 내가 만든 resource 파일 찾기
+ctrl+shift+t: 클래스 찾기
 ---------------------------------------------------------------------------------------------------------------------------
 
 *정적(static) vs. 동적(dynamic)
@@ -47,6 +49,14 @@ JSP: 	- HTML 코드 안에 자바 코드를 삽입
 	- 자바 코드를 <% %> 태그 안에 처리해야 함
 	- 키워드가 태그화 되어 서블릿에 비해 배우기 쉽다.
 	- 서버측 스크립트 언어
+
+*MVC(Model View Controller)
+View : 클라이언트의 요청을 받으며, 응답을 해주고 화면을 구성해준다. 사용자가 보게될 결과 화면을 담당. HTML, JSP
+Controller : View로 부터 요청을 전달 받으며, Model로부터 넘어온 데이터를 view 측에 전달한다. Servlet
+Model: 데이터와 비즈니스 로직을 관리/처리한다. 사용자의 요청에 대한 업무를 처리. Java class
+	DTO(Data Transfer Object) : 데이터 담는 객체를 정의한다.
+	Service : 클라이언트가 요청하는 서비스에 대해서 처리한다. (ex 트랜잭션)
+	DAO(Data Access Object) : 데이터베이스와 연결되는 곳이다.
 
 *JSP 기본 문법
 선언문: <%! ... %>	자바 변수나 메소드를 정의
@@ -65,5 +75,45 @@ setProperty: 자바빈즈의 프로퍼티 값을 설정 <jsp:setProperty ... />
 getProperty: 자바빈즈의 프로퍼티 값을 얻어온다 <jsp:getProperty ... />
 param: <jsp:forward>, <jsp:include>, <jsp:plugin> 태그에 인자를 추가. <jsp:param ... />
 ...plugin, element, attribute, body, text
+
+*forward vs. redirect
+- Forward 메서드는 웹 애플리케이션의 한 서블릿에서 다른 리소스로 요청을 전달하며, 
+이 리소스는 다른 서블릿, JSP 페이지 또는 HTML 파일이 될 수 있습니다. 
+브라우저로 요청을 전달을 하는 것이 아니라 서버 내의 다른 리소스를 호출합니다. 
+jsp 액션 태그. 요청정보가 유지. url이 변화하지 않음. 객체를 재사용. 시스템 변화가 생기지 않는 요청에 적합(검색등의 단순 조화)
+- Redirect 메서드는 요청을 브라우저로 전달하여 다른 웹 애플리케이션을 요청합니다. 
+Redirect는 같은 URL을 호출하더라도 request에 있는 정보를 사용하지 않고 새롭게 요청합니다.
+jsp 내장 객체. 새로운 요청이 수행. url이 변화. 객체를 재사용하지 않음. 시스템 변화가 생기는 요청에 적합(로그인, 글쓰기)
+
+*scope: 프로그램상 사용되는 변수들은 사용 가능한 범위를 가지는데, 이 때 변수의 범위
+1). Page : 페이지 내에서 지역변수처럼 사용한다.
+2). Request : http 요청을 WAS가 받아서 웹 브라우저에게 응답할 때까지 변수가 유지되는 경우 사용
+3). Session : 웹 브라우저 별로 변수가 관리되는 경우 사용
+4). Application : 웹 어플리케이션이 시작되고 종료될 때까지 변수가 유지되는 경우 사용
+( * Application > Session > Request > Page )
+
+*내장 객체:  JSP 페이지에서 사용할 수 있도록 JSP 컨테이너에 미리 정의된 객체
+1) request : 웹 브라우저의 HTTP 요청 정보를 저장함
+- 반환 유형 : javax.servlet.http.HttpServletRequest
+2) response : 웹 브라우저의 HTTP 요청에 대한 응답 정보를 저장함
+- 반환 유형 : javax.servlet.http.HttpServletResponse
+3) out : JSP 페이지에 출력할 내용을 담고 있는 출력 스트림임
+- 반환 유형 : javax.servlet.jsp.jsp.jspWriter
+4) session : 웹 브라우저의 정보를 유지하기 위한 세션 정보를 저장함
+- 반환 유형 : javax.servlet.http.HttpSession
+5) application : 웹 애플리케이션의 콘텍스트 정보를 저장함
+- 반환 유형 : javax.servlet.ServletContext
+6) pageContext : JSP 페이지의 정보를 저장함
+- 반환 유형 : javax.servlet.PageContext
+7) page : JSP 페이지를 구현한 자바 클래스로 JSP 페이지 자체를 나타냄
+- 반환 유형 : javax.lang.Object
+8) config : JSP 페이지의 설정 정보를 저장함
+- 반환 유형 : javax.servlet.ServletConfig
+9) exception : JSP 페이지의 예외 발생을 처리함
+- 반환 유형 : javax.lang.Throwable
+
+*[ch17] JSTL(JSP Standard Tag Library): 
+JSP 페이지에서 스크립트 요소로 인한 코드의 복잡함을 해결하기 위한 일종의 사용자 정의 태그의 표준.
+태그: 코처(c), 국제화(fmt), 함수(fn)
 
 

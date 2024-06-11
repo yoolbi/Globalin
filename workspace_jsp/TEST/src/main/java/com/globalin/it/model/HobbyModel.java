@@ -8,6 +8,6 @@ public class HobbyModel {
 		String mName = req.getParameter("mName");
 		String[] hobby = req.getParameterValues("hobby");
 		req.setAttribute("mName", mName);
-		req.setAttribute("hobby", hobby);
+		req.setAttribute("hobbys", hobby);
 	}
 }

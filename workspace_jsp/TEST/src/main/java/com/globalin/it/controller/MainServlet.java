@@ -32,7 +32,7 @@ public class MainServlet extends HttpServlet {
 		}
 		
 		if(req.getRequestURI().contains("/hobby.do")) {
-			req.getRequestDispatcher("/view/ch06_form/form.jsp").forward(req, resp);
+			req.getRequestDispatcher("/view/ch06_hobby/form.jsp").forward(req, resp);
 		}
 		
 	}
@@ -56,7 +56,7 @@ public class MainServlet extends HttpServlet {
 		
 		if(req.getRequestURI().contains("/form_process.do")) {
 			new HobbyModel().process(req);
-			req.getRequestDispatcher("/view/ch06_form/form_process.jsp").forward(req, resp);
+			req.getRequestDispatcher("/view/ch06_hobby/form_process_jstl.jsp").forward(req, resp);
 		}
 	}
 
