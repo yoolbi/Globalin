@@ -20,4 +20,12 @@
   	<servlet-name>FServlet</servlet-name>
   	<url-pattern>*.abc</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>SessionServlet</servlet-name>
+  	<servlet-class>com.globalin.it.controller.SessionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>SessionServlet</servlet-name>
+  	<url-pattern>*.coffee</url-pattern>
+  </servlet-mapping>
 </web-app>
