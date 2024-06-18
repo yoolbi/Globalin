@@ -1,0 +1,51 @@
+
+코드로 배우는 스프링 웹 프로젝트
+
+[환경설정]
+*예제소스
+https://cafe.naver.com/gugucoding
+Q&A코드로 배우는 Spring 실습 > 코배스(개정판)- 2022년 6월 이클립스 메이븐환경 소스코드입니다.
+*STS 4
+https://spring.io/tools
+*롬복 1.18
+https://projectlombok.org/download
+*오라클 XE 18c
+https://www.oracle.com/database/technologies/xe-downloads.html
+*SQL developer 23.1
+https://www.oracle.com/database/sqldeveloper/technologies/download/
+*자바 jdk 8
+https://developer.oracle.com/
+*톰캣 9
+https://tomcat.apache.org/
+
+[팁]
+*오라클 에러 날 때
+-ojdbc8 추가
+-접속 정보 확인
+*게시판 목록 에러날 때
+-TBL_BOARD REPLYCNT 생성
+*로그인 안될 때
+-계정/권한생성,PW암호화
+*파일 업로드 안될 때
+-업로드 폴더 생성
+*로그아웃 에러날 때
+-persistent_logins 테이블 생성
+
+
+lombok 설치
+프로젝트 우클릭 -> maven -> update maven project
+
+https://mvnrepository.com/
+ojdbc8 검색 -> 선택후 maven에 있는 <dependency> 코드 복사 -> pom.xml <dependencies> 안에 붙여넣고 저장
+maven dependencies에 ojdbc8 있는지 확인
+
+java: OOP, 캡상다
+spring: 프레임워크. 핵심 기술:AOP, IoC/DI, PSA
+POJO(plain old java object): java로 생성하는 순수한 객체 
+
+
+
+
+
+
+
