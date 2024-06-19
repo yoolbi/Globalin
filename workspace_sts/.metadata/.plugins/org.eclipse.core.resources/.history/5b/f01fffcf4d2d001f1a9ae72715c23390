@@ -1,0 +1,13 @@
+package org.zerock.service;
+
+public class EeneServiceImpl implements EeneService {
+
+	@Override
+	public void testRead() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+
+}

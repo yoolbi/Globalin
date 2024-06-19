@@ -39,6 +39,15 @@ https://mvnrepository.com/
 ojdbc8 검색 -> 선택후 maven에 있는 <dependency> 코드 복사 -> pom.xml <dependencies> 안에 붙여넣고 저장
 maven dependencies에 ojdbc8 있는지 확인
 
+SELECT 
+    p.post_id, 
+    p.content, 
+    u.name AS user_name
+FROM 
+    post p
+JOIN 
+    "user" u ON p.user_id = u.user_id;
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 java: OOP, 캡상다
 
@@ -78,8 +87,24 @@ https://velog.io/@rladuswl/ORM%EC%9D%98-%EA%B0%9C%EB%85%90-JPA%EC%99%80-MyBatis-
 web.xml -> ContextLoaderListener -> root-context.xml -> beans -> bean (싱글톤 기반) 
 
 빈(Bean): 스프링에서 관리되는 객체
+불러오는법: (1) xml (파일), (2) @ (소스코드에서)
+Beans: 빈의 집합소
 
 Lombok: 컴파일시 흔하게 코드를 작성하는 기능들을 완성해주는 라이브러리
 	예) @Setter 어노테이션은 setter 메서드를 만들어주는 역할
 	     @Data: @ToString, @EqualsAndHashCode, @Getter/@Setter, @RequiredArgsConstructor 모두 결합한 형태
+
+비동기 통신(Asynchronous Communication)
+	서버와 클라이언트 간에 데이터를 주고받을 때, 요청과 응답이 서로 독립적으로 처리되는 것
+	웹페이지에서 이미지를 로드하는 경우 비동기적으로 이미지를 처리하며 다른 코드를 동시에 실행할 수 있도록 하는 것
+
+AJAX : 웹 개발의 근본, XMLHttpRequest
+Fetch : 신규 강자, Promise 기반 세련된 방식
+          XMLHttpRequest의 현대적인 대안으로, 네이티브 Promise 기반의 API를 제공
+          async/await도 fetch와 비슷
+          브라우저 기본 제공 라이브러리
+Axios: HTTP 요청을 위한 외부 라이브러리로, Promise 기반의 API를 제공
+        요청과 응답 가로채고 수정 가능
+        외부 라이브러리
+
 

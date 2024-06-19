@@ -65,6 +65,8 @@
         </sec:authorize>
 
 <button data-oper='list' class="btn btn-info">List</button>
+<button data-oper='eene' class="btn btn-info">いいね！</button>
+<span>(0)</span>
 
 <%-- <form id='operForm' action="/boad/modify" method="get">
   <input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
@@ -92,6 +94,7 @@
 </div>
 <!-- /.row -->
 
+<div id="eeneDiv"></div>
 
 
 <div class='bigPictureWrapper'>
@@ -259,7 +262,7 @@
 <script type="text/javascript" src="/resources/js/reply.js"></script>
 
 <script>
-
+var loginUserId = '';
 $(document).ready(function () {
   
   var bnoValue = '<c:out value="${board.bno}"/>';
@@ -599,7 +602,7 @@ modalModBtn.on("click", function(e){
     var csrfHeaderName ="${_csrf.headerName}"; 
     var csrfTokenValue="${_csrf.token}";
 
-
+	loginUserId = replyer;
  
 });
 
@@ -683,6 +686,45 @@ $(document).ready(function() {
     operForm.submit();
     
   });  
+
+  $("button[data-oper='eene']").on("click", function(e){
+	/*   
+	var request = new XMLHttpRequest(); // XMLHttpRequest 생성
+    request.open("GET", "/eene/testRead"); // 데이터를 GET Method로 요청
+    request.send(); // 실제 Send
+    request.onreadystatechange = function() {
+	    if ( request.readyState == 4 && request.status == 200 ) { // request가 끝났으며(4), 성공적(200)인 경우. request.onload=()=>{} 으로 교체해도 가능하다.
+			$('#eeneDiv').html(request.responseText);
+	    }
+    };
+	*/
+	/*
+	$.ajax({
+	  method: "get",
+	  url: "/eene/testRead",
+	  data: { 
+			bno: '<c:out value="${board.bno}"/>', 
+			eewriter: loginUserId 
+		}
+	})
+	  .done(function( msg ) {
+	    $('#eeneDiv').html(msg);
+	});
+	*/
+	$.ajax({
+		  method: "post",
+		  url: "/eene/insert",
+		  data: { 
+				bno: '<c:out value="${board.bno}"/>', 
+				eewriter: loginUserId 
+			}
+		})
+		  .done(function( msg ) {
+		    $('#eeneDiv').html(msg);
+		});
+    
+  });  
+  
 });
 </script>
 

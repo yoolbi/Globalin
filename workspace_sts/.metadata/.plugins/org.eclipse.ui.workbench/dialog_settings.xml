@@ -26,16 +26,20 @@
 		<item key="org.eclipse.ui.internal.quickaccess.QuickAccessDialogDIALOG_USE_PERSISTED_SIZE" value="true"/>
 		<item key="org.eclipse.ui.internal.quickaccess.QuickAccessDialogDIALOG_USE_PERSISTED_LOCATION" value="false"/>
 		<list key="orderedElements">
-			<item value="org.eclipse.wst.server.ui.ServersView"/>
+			<item value="search.in.help"/>
+			<item value="org.eclipse.lsp4e.callHierarchy.callHierarchyView"/>
 		</list>
 		<list key="orderedProviders">
+			<item value="search.help"/>
 			<item value="org.eclipse.e4.ui.parts"/>
 		</list>
 		<list key="textEntries">
 			<item value="1"/>
+			<item value="1"/>
 		</list>
 		<list key="textArray">
 			<item value="server"/>
+			<item value="servers"/>
 		</list>
 	</section>
 	<section name="NewWizardAction">
@@ -45,5 +49,14 @@
 		</list>
 		<section name="NewWizard.dialogBounds">
 		</section>
+	</section>
+	<section name="WorkbenchPreferenceDialog.dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="651"/>
+		<item key="DIALOG_Y_ORIGIN" value="158"/>
+		<item key="DIALOG_WIDTH" value="729"/>
+		<item key="DIALOG_HEIGHT" value="556"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+	</section>
+	<section name="EditorSelectionDialog">
 	</section>
 </section>

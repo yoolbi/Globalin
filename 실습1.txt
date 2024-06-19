@@ -32,16 +32,19 @@ FROM    TBL_EENE;
 
 --SPRING
 테이블 하나당 
-1) QUERY: src/main/java/org.zerock.mapper
-	EeneMapper.java에 인터페이스
+0)  src/main/java/org.zerock.domain
+	EeneVO.java에 디비 변수들
+1) QUERY: src/main/resources/org/zerock/mapper에
+	EeneMapper.xml에 쿼리문 작성 (mybatis)
+	post할때 입력 값을 (0)에 있는 변수 사용하게 됨
+2) QUERY: src/main/java/org.zerock.mapper
+	EeneMapper.java에 (1)쿼리문의 인터페이스
    	쿼리문을 실행시킬 인터페이스
-2) QUERY: src/main/resources/org/zerock/mapper에
-	EeneMapper.xml에 (1)의 인터페이스의 쿼리문 작성
 3) SERVICE(MODEL): src/main/java/org.zerock.service
 	EeneService.java에 인터페이스
 4) SERVICE(MODEL): src/main/java/org.zerock.service
 	EeneServiceImple.java에서 (3) 인터페이스 오버라이드
-	(1) EeneMapper인터페이스 실행해서 (2)쿼리문 실행
+	(2) EeneMapper인터페이스 실행해서 (1)쿼리문 실행
 5) CONTROLLER: src/main/java/org.zerock.controller
 	EeneController.java에서 
 	(3) EeneService인터페이스 실행하면 (4)에서 오버라이딩한 결과 실행
@@ -50,3 +53,12 @@ FROM    TBL_EENE;
 실행 흐름: SERVLET->CONTROLLER-> SERVICE(MODEL)->QUERY
 
 실행: /eene/testRead
+
+
+*AJAX 실습
+
+
+
+
+
+
