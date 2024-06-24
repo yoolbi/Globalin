@@ -1,4 +1,4 @@
-package com.globalin.react;
+package com.global.react;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
