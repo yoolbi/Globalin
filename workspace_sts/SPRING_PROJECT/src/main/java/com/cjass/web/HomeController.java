@@ -116,7 +116,7 @@ public class HomeController {
 	@RequestMapping(value = "/enterChat", method = RequestMethod.GET)
 	public String enterChat(Model model, @RequestParam Map map, HttpSession session, HttpServletRequest request)
 			throws Exception {
-
+		model.addAttribute("nick", map.get("nick").toString());
 		return "chat/chat";
 	}
 
