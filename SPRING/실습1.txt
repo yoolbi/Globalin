@@ -1,0 +1,64 @@
+
+
+*마이바티스 실습
+
+--테이블 생성
+  CREATE TABLE "BOOK_EX"."TBL_EENE" 
+   (	"ENO" NUMBER(10,0), 
+	"BNO" NUMBER(10,0) NOT NULL ENABLE, 
+	"EEWRITER" VARCHAR2(50 BYTE) NOT NULL ENABLE, 
+	"EEDATE" DATE DEFAULT sysdate,  
+	 CONSTRAINT "PK_EENE" PRIMARY KEY ("ENO")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE, 
+	 CONSTRAINT "FK_EENE_BOARD" FOREIGN KEY ("BNO")
+	  REFERENCES "BOOK_EX"."TBL_BOARD" ("BNO") ENABLE
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+
+SELECT   ENO
+        ,BNO
+        ,EEWRITER
+        ,EEDATE
+FROM    TBL_EENE;
+
+--SPRING
+테이블 하나당 
+0)  src/main/java/org.zerock.domain
+	EeneVO.java에 디비 변수들
+1) QUERY: src/main/resources/org/zerock/mapper에
+	EeneMapper.xml에 쿼리문 작성 (mybatis)
+	post할때 입력 값을 (0)에 있는 변수 사용하게 됨
+2) QUERY: src/main/java/org.zerock.mapper
+	EeneMapper.java에 (1)쿼리문의 인터페이스
+   	쿼리문을 실행시킬 인터페이스
+3) SERVICE(MODEL): src/main/java/org.zerock.service
+	EeneService.java에 인터페이스
+4) SERVICE(MODEL): src/main/java/org.zerock.service
+	EeneServiceImple.java에서 (3) 인터페이스 오버라이드
+	(2) EeneMapper인터페이스 실행해서 (1)쿼리문 실행
+5) CONTROLLER: src/main/java/org.zerock.controller
+	EeneController.java에서 
+	(3) EeneService인터페이스 실행하면 (4)에서 오버라이딩한 결과 실행
+
+
+실행 흐름: SERVLET->CONTROLLER-> SERVICE(MODEL)->QUERY
+
+실행: /eene/testRead
+
+
+*AJAX 실습
+
+
+
+
+
+

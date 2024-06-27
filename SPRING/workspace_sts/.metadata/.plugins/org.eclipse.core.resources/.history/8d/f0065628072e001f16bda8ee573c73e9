@@ -1,0 +1,11 @@
+package org.zerock.domain;
+
+@Data
+public class EeneVO {
+
+	String eno;
+	String bno;
+	String eewriter;
+	String eedate;
+	
+}
