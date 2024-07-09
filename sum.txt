@@ -1,14 +1,30 @@
 
+#####HTML,CSS,JavaScript#####
+
+1) HTML 폼태그 <form>: 입력을 통해 사용자로부터 정보를 '전달 받는 것'. 웹페이지의 입력 양식.
+	속성: name, action, method, target 등
+	<input> 태그는 사용자가 다양하게 폼 태그에 입력할 수 있는 공간을 만들어 줌.
+
+2) CSS 셀렉터(Selector): 선택을 해주는 요소. 이를 통해 특정 요소들을 선택하여 스타일을 적용.
+	예) 전체 선택자 (* {}), 태그 선택자 (div {}), 클랙스 선택자 (.myClass {}), id 선택자 (#myId {}) 
+
+3) Javascript 이벤트: 웹페이지에서 마우스를 클릭했을 때, 키를 입력했을 때, 특정요소에 포커스가 이동되었을 때 어떤 사건을 발생시키는 것 
+
+4) DOM(Document Object Model): HTML요소를 JavaScript Object처럼 조작할 수 있는 Model.
+	HTML의 작은 부분까지 접근할 수 있는 구조로, DOM을 이용하여 HTML로 구성된 웹페이지를 동적으로 움직이게 만들 수 있게 하는 인터페이스.
+	예) document.getElementById(id), document.createElement(name), element.setAttribute(name, value)
+
 #####JAVA#####
 
-1) OOP (Object Oriented Programming): 객체의 관점에서 프로그밍. 프로그램을 수많은 객체라는 기본 단위로 나누고
+1) OOP (Object Oriented Programming): 객체의 관점에서 프로그래밍. 프로그램을 수많은 객체라는 기본 단위로 나누고
 				이들의 상호작용으로 서술하는 방식. *객체: object, 사물. 클래스의 인스턴스/배열.
-	3 요소:    1) 캡슐화: 변수와 함수를 하나의 단위로 묶는 것 (정보 은닉)
-		 2) 상속: 자식 클래스가 부모 클래스의 특성과 기능을 그대로 물려받는 것
-	 	 3) 다형성: 하나의 변수/함수가 상황에 따라 다른 의미로 해석될 수 있는 것
+	 요소:   1) 캡슐화(Encapsulation): 변수와 함수를 하나의 단위로 묶는 것 (정보 은닉)
+		 2) 상속(Inheritance): 자식 클래스가 부모 클래스의 특성과 기능을 그대로 물려받는 것. extends
+	 	 3) 다형성(Polymorphism): 하나의 변수/함수가 상황에 따라 다른 의미로 해석될 수 있는 것
+		 4) 추상화 (Abstraction): 목적과 관련이 없는 부분을 제거하여 필요한 부분만을 표현하기 위한 개념
 
 2) 클래스: 객체를 만드는 설계도 (객체를 생성하는 틀의 개념)
-	 객체의 상태를 나타내는 필드 (변수)와 ㅐㄱ체의 행동을 나타내는 메소드로 구성됨.
+	 객체의 상태를 나타내는 필드(변수)와 객체의 행동을 나타내는 메소드로 구성됨. JAVA는 클래스들의 모임.
 
 3) 인스턴스: 어떤 클래스로부터 만들어진 객체를 그 클래스의 '인스턴스'라고 함.
 
@@ -49,6 +65,19 @@
 
 13) 전역변수: 전반적 다. 지역 변수: 함수 내에서. 정적 변수: 메모리에 저장
 
+14) 자료형/데이터 타입: 어떤 값의 유형.데이터 타입에 따라 값이 차지하는 메모리 공간의 크기와, 값이 저장되는 방식이 결정됨.
+	- 기본 타입(Primitive type): 값을 저장할 때, 데이터의 실제 값이 저장. 
+				   정수형(byte, short, int, long), 실수형(float, double), 문자형(char), 논리형(boolean)
+	- 참조 타입(Reference type): 값을 저장할 때, 데이터가 저장된 위치를 나타내는 주소 값이 저장.
+				   클래스형Class Type, 인터페이스형Interface Type, 배열형...
+
+15) 별표 출력 프로그램
+for(int i=1;i<5;i++){
+	for(int j=0;j<i;j++){
+		System.out.print("*");
+	}
+	System.out.println("");
+}
 
 #####DB#####
 
@@ -75,11 +104,13 @@
 
 8) 뷰(VIEW): 가상 테이블, 하나 이상의 테이블을 조회하는 SELECT문을 저장한 객체
 
-9) 퀀스(SEQUENCE): 오라클 데이터베이스에서 특정 규칙에 맞는 연속 숫자를 생성하는 객체
+9) 시퀀스(SEQUENCE): 오라클 데이터베이스에서 특정 규칙에 맞는 연속 숫자를 생성하는 객체
 
 10) 동의어(SYNONYM): 별칭. 테이블,뷰,시퀀스 등 객체 이름 대신 사용할 수 있는 다른 이름을 부여하는 객체. 보안
 
-11) SQL vs NoSQL
+11) 서브쿼리: 하나의 SQL 문 내에 있는 또 다른 sql문
+
+12) SQL vs NoSQL
 	SQL: 	- 관계형 데이터베이스 (RDBMS)
 		- 구조화 쿼리 언어 (SQL) 사용, 미리 정의된 스키마가 있음
 		- 테이블 기반
@@ -161,7 +192,9 @@
 	9) exception : JSP 페이지의 예외 발생을 처리함
 	- 반환 유형 : javax.lang.Throwable
 
-13) JSTL(JSP Standard Tag Library): JSP 코드의 복잡함을 해결. 사용자 정의 태그의 표준
+13) JSTL, EL: JSP 코드의 복잡함을 해결. <% %> 사용 X
+	JSTL(JSP Standard Tag Library): 사용자 정의 태그의 표준. EL을 사용. <c:set>, <c:if test="true">, <c:forEach>
+	EL(Expression Language): ${expr} 
 
 14) 인증(Authentication): 신원 입증, 로그인
      인가, 권한 부여(Authorization): 목적 허용
@@ -178,7 +211,6 @@
 17) JSP: 자바, 서버 사이드 스크립트, 웹 페이지 작성 vs. JS: 클라이언트 사이드 스크립트, 브라우저 객체 제어
 
 18) Apache Tomcat: 웹 어플리케이션 서버
-
 
 #####SPRING#####
 
