@@ -276,3 +276,24 @@ for(int i=1;i<5;i++){
 	빌드: 소스코드 파일을 컴퓨터에서 실행할 수 있는 독립적인 형태로 변환하는 과정과 결과
 	빌드 관리도구: 필요한 라이브러리들을 자동으로 관리
 
+10) 테이블 하나당 
+	0) DOMAIN: src/main/java/org.zerock.domain
+		EeneVO.java에 디비 변수들
+	1) QUERY: src/main/resources/org/zerock/mapper에
+		EeneMapper.xml에 쿼리문 작성 (mybatis)
+		post할때 입력 값을 (0)에 있는 변수 사용하게 됨
+	2) QUERY: src/main/java/org.zerock.mapper
+		EeneMapper.java에 (1)쿼리문의 인터페이스
+   		쿼리문을 실행시킬 인터페이스
+	3) SERVICE(MODEL): src/main/java/org.zerock.service
+		EeneService.java에 인터페이스
+	4) SERVICE(MODEL): src/main/java/org.zerock.service
+		EeneServiceImple.java에서 (3) 인터페이스 오버라이드
+		(2) EeneMapper인터페이스 실행해서 (1)쿼리문 실행
+	5) CONTROLLER: src/main/java/org.zerock.controller
+		EeneController.java에서 
+		(3) EeneService인터페이스 실행하면 (4)에서 오버라이딩한 결과 실행
+
+	실행 흐름: SERVLET->CONTROLLER-> SERVICE(MODEL)->QUERY
+
+
