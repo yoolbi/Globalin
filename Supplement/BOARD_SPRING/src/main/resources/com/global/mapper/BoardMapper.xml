@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.global.mapper.BoardMapper">
+
+	<insert id="insert">
+		insert into board (
+			title
+			,content
+		) values (
+			#{title}
+			,#{content}
+		)
+	</insert>
+	
+	<select id="select">
+		select 	seq
+				,title
+				,content
+				,createdate
+		from	board
+		<if test="seq != 0">
+		where	seq = #{seq}
+		</if>
+		order by seq desc
+	</select>
+	
+	<delete id="delete">
+		delete 	from board
+		where	seq = #{seq}
+	</delete>
+	
+	<update id="update">
+		update 	board set
+				title = #{title}
+				,content = #{content}
+		where	seq = #{seq}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+</mapper>
